@@ -1,0 +1,31 @@
+version: 2.1
+
+jobs:
+  deploy:
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    steps:
+      - checkout
+      - run:
+          command: terraform init -input=false
+      - run:
+          name: Terraform validate
+          command: terraform validate
+      - run:
+          name: Terraform plan
+          command: terraform plan
+      - run:
+          name: Terraform apply
+          command: terraform apply -auto-approve
+
+workflows:
+  deploy:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only: main
+      - deploy:
+          filters:
+            branches:
+              only: /^pull\/.*$/
