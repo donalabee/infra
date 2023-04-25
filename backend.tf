@@ -1,3 +1,9 @@
 terraform {
-  cloud {}
+  cloud {
+    organization = "KwekuDevops"
+
+    workspaces {
+      name = "infra"
+    }
+  }
 }
