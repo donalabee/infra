@@ -7,9 +7,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: create token locally
-          command: echo "credentials \"app.terraform.io\" {token = \"TERRAFORM_TOKEN\"}" > ~/.terraformrc
-      - run:
           command: terraform init -input=false
       - run:
           name: Terraform validate
